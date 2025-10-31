@@ -71,10 +71,10 @@ Fly.io provides fast, secure deployment with a generous free tier.
    fly auth login
    ```
 
-3. **Launch the app**:
+3. **Launch the app** (skip the auto-generated config):
    ```bash
    cd management_app
-   fly launch
+   fly launch --no-deploy
    ```
    Follow the prompts to configure your app name and region.
 
