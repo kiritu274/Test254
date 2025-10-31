@@ -1,0 +1,21 @@
+i# TODO List for Management Web Application
+
+- [x] Create project directory named "management_app"
+- [x] Set up Python virtual environment
+- [x] Install Django and dependencies (django-bootstrap4, etc.)
+- [x] Create Django project
+- [x] Create Django apps: projects, tasks, users
+- [x] Implement models: Custom User (with roles), Project, Task
+- [x] Configure Django's built-in authentication and permissions for RBAC
+- [x] Implement views and URLs for authentication (user_app)
+- [x] Implement views and URLs for CRUD operations on projects and tasks
+- [x] Create templates with Bootstrap for responsive design
+- [x] Add dashboard with charts using Chart.js
+- [x] Implement forms for user input
+- [x] Fix bootstrap_form template errors
+- [x] Run makemigrations and migrate
+- [x] Create superuser
+- [x] Fix created_by field in task creation
+- [x] Add README.md
+- [x] Test the application locally
+- [x] Run the Django server and verify all features work correctly

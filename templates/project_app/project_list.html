@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+<h1>Projects</h1>
+<a href="{% url 'project_create' %}" class="btn btn-primary mb-3">Create Project</a>
+<div class="row">
+    {% for project in projects %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.name }}</h5>
+                    <p class="card-text">{{ project.description|truncatechars:100 }}</p>
+                    <p class="card-text"><small class="text-muted">Status: {{ project.status }}</small></p>
+                    <a href="{% url 'project_detail' project.pk %}" class="btn btn-info">View</a>
+                    <a href="{% url 'project_update' project.pk %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'project_delete' project.pk %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-12">
+            <p>No projects found.</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

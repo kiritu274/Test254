@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome, {{ user.username }}!</h1>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Your Projects</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for project in projects %}
+                        <li class="list-group-item">
+                            <a href="{% url 'project_detail' project.pk %}">{{ project.name }}</a>
+                            <span class="badge badge-{{ project.status|lower }}">{{ project.status }}</span>
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item">No projects yet.</li>
+                    {% endfor %}
+                </ul>
+                <a href="{% url 'project_create' %}" class="btn btn-primary mt-3">Create Project</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Your Tasks</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for task in tasks %}
+                        <li class="list-group-item">
+                            <a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a>
+                            <span class="badge badge-{{ task.status|lower }}">{{ task.status }}</span>
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item">No tasks assigned.</li>
+                    {% endfor %}
+                </ul>
+                <a href="{% url 'task_create' %}" class="btn btn-primary mt-3">Create Task</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Charts</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Projects', 'Tasks'],
+            datasets: [{
+                label: 'Count',
+                data: [{{ projects|length }}, {{ tasks|length }}],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
