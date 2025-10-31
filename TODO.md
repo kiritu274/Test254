@@ -19,3 +19,4 @@ i# TODO List for Management Web Application
 - [x] Add README.md
 - [x] Test the application locally
 - [x] Run the Django server and verify all features work correctly
+- [x] Prepare deployment configurations for Fly.io, Heroku, and Vercel

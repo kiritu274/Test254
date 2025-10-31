@@ -149,6 +149,65 @@ Fly.io provides fast, secure deployment with a generous free tier.
 9. **Access your deployed app**:
    Your app will be available at `https://your-app-name.herokuapp.com/`
 
+### Vercel Deployment (Alternative)
+
+Vercel can deploy Django applications using serverless functions.
+
+1. **Install Vercel CLI**:
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Login to Vercel**:
+   ```bash
+   vercel login
+   ```
+
+3. **Create Vercel configuration**:
+   Create a `vercel.json` file in the `management_app` directory:
+   ```json
+   {
+     "version": 2,
+     "builds": [
+       {
+         "src": "management_project/wsgi.py",
+         "use": "@vercel/python",
+         "config": {
+           "maxLambdaSize": "15mb"
+         }
+       }
+     ],
+     "routes": [
+       {
+         "src": "/(.*)",
+         "dest": "management_project/wsgi.py"
+       }
+     ],
+     "env": {
+       "DEBUG": "False",
+       "SECRET_KEY": "@secret-key",
+       "ALLOWED_HOSTS": "@allowed-hosts"
+     }
+   }
+   ```
+
+4. **Deploy to Vercel**:
+   ```bash
+   cd management_app
+   vercel --prod
+   ```
+
+5. **Set environment variables** in Vercel dashboard:
+   - DEBUG: False
+   - SECRET_KEY: your-secret-key-here
+   - ALLOWED_HOSTS: your-app-name.vercel.app
+
+6. **Run migrations on Vercel** (if supported, otherwise use local database):
+   Vercel deployments are stateless, so consider using a cloud database like PostgreSQL.
+
+7. **Access your deployed app**:
+   Your app will be available at `https://your-app-name.vercel.app/`
+
 ## Default Admin Account
 
 - **Username**: admin

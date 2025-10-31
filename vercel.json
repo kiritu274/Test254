@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "management_project/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "management_project/wsgi.py"
+    }
+  ],
+  "env": {
+    "DEBUG": "False",
+    "SECRET_KEY": "@secret-key",
+    "ALLOWED_HOSTS": "@allowed-hosts"
+  }
+}
